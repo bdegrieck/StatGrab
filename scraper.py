@@ -1,28 +1,25 @@
-from dataclasses import dataclass
-
 import requests
 from bs4 import BeautifulSoup
 
 from errors import InvalidResponse
 
 
-@dataclass
 class Scraper:
     """
-
     Scraper is a tool for web scraping sites
     url - url site
-
     """
-    url: str
 
+    def __init__(self, url: str):
+        self.url = url
+
+    @property
     def grab(self):
-        try:
-            response = requests.get(self.url)
-            scraper = BeautifulSoup(response.content, "html.parser")
-
-        except:
-            raise InvalidResponse(url=self.url, response=response)
+        response = requests.get(self.url)
+        if response.status_code != 200:
+            raise InvalidResponse(response=response.status_code, url=self.url)
+        scraper = BeautifulSoup(response.content, "html.parser")
+        return scraper
 
 
 
