@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>StatGrab</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        .dropdown-container {
+            margin: 20px 0;
+        }
+        .submit-button {
+            background-color: #90ee90; /* Light green color */
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .submit-button:hover {
+            background-color: #76c776; /* Darker green on hover */
+        }
+    </style>
+</head>
+<body>
+    <h1>StatGrab</h1>
+    <form action="/submit" method="POST">
+        <div class="dropdown-container">
+            <label for="team">Choose a team:</label>
+            <select name="team" id="team" required>
+                <option value="" disabled selected>Select a team</option>
+                <option value="bills">bills</option>
+                <option value="dolphins">dolphins</option>
+                <option value="jets">jets</option>
+                <option value="patriots">patriots</option>
+                <option value="steelers">steelers</option>
+                <option value="ravens">ravens</option>
+                <option value="bengals">bengals</option>
+                <option value="browns">browns</option>
+                <option value="texans">texans</option>
+                <option value="colts">colts</option>
+                <option value="titans">titans</option>
+                <option value="jaguars">jaguars</option>
+                <option value="chiefs">chiefs</option>
+                <option value="chargers">chargers</option>
+                <option value="broncos">broncos</option>
+                <option value="raiders">raiders</option>
+                <option value="eagles">eagles</option>
+                <option value="commanders">commanders</option>
+                <option value="cowboys">cowboys</option>
+                <option value="giants">giants</option>
+                <option value="lions">lions</option>
+                <option value="vikings">vikings</option>
+                <option value="packers">packers</option>
+                <option value="bears">bears</option>
+                <option value="falcons">falcons</option>
+                <option value="buccaneers">buccaneers</option>
+                <option value="saints">saints</option>
+                <option value="panthers">panthers</option>
+                <option value="seahawks">seahawks</option>
+                <option value="cardinals">cardinals</option>
+                <option value="rams">rams</option>
+                <option value="49ers">49ers</option>
+            </select>
+        </div>
+        <button type="submit" class="submit-button">Submit</button>
+    </form>
+</body>
+</html>

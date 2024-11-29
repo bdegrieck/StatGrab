@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Match Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: #90ee90; /* Light green */
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            text-decoration: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .back-button:hover {
+            background-color: #76c776; /* Darker green on hover */
+        }
+        .injury-report {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+        .injury-column {
+            width: 45%;
+            border: 1px solid #ddd;
+            padding: 15px;
+            text-align: left;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        table th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+    <!-- Back Button -->
+    <a href="/" class="back-button">Back to Home</a>
+
+    <h1>{{ input_team_name }} vs. {{ opponent_team_name }}</h1>
+
+    <!-- Injury Report Section -->
+    <div class="injury-report">
+        <div class="injury-column">
+            <h2>Injury Report - {{ input_team_name }}</h2>
+            <table style="border-collapse: collapse; width: 100%; text-align: center; border: 3px solid black;">
+                <thead>
+                    <tr>
+                        <th style="border: 3px solid black; padding: 8px;">Player</th>
+                        <th style="border: 3px solid black; padding: 8px;">Position</th>
+                        <th style="border: 3px solid black; padding: 8px;">Injury</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for injury_data in input_injuries_list %}
+                    <tr>
+                        <td style="border-left: 3px solid black; border-right: 3px solid black; border-bottom: 1px solid black; padding: 8px;">
+                            {{ injury_data.player.first_name }} {{ injury_data.player.last_name }}
+                        </td>
+                        <td style="border-left: 3px solid black; border-right: 3px solid black; border-bottom: 1px solid black; padding: 8px;">
+                            {{ injury_data.position }}
+                        </td>
+                        <td style="border-left: 3px solid black; border-right: 3px solid black; border-bottom: 1px solid black; padding: 8px;">
+                            {{ injury_data.injury }}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    <div class="injury-column">
+        <h2>Injury Report - {{ opponent_team_name }}</h2>
+        <table style="border-collapse: collapse; width: 100%; text-align: center; border: 3px solid black;">
+            <thead>
+                <tr>
+                    <th style="border: 3px solid black; padding: 8px;">Player</th>
+                    <th style="border: 3px solid black; padding: 8px;">Position</th>
+                    <th style="border: 3px solid black; padding: 8px;">Injury</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for injury_data in opponent_injuries_list %}
+                <tr>
+                    <td style="border-left: 3px solid black; border-right: 3px solid black; border-bottom: 1px solid black; padding: 8px;">
+                        {{ injury_data.player.first_name }} {{ injury_data.player.last_name }}
+                    </td>
+                    <td style="border-left: 3px solid black; border-right: 3px solid black; border-bottom: 1px solid black; padding: 8px;">
+                        {{ injury_data.position }}
+                    </td>
+                    <td style="border-left: 3px solid black; border-right: 3px solid black; border-bottom: 1px solid black; padding: 8px;">
+                        {{ injury_data.injury }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+    <!-- Stats Table -->
+    <h2>Stats Comparison</h2>
+    <table style="border-collapse: collapse; width: 100%; text-align: center; border: 3px solid black;">
+        <thead>
+            <tr>
+                <th style="border: 3px solid black; padding: 8px;">Stat Name</th>
+                <th style="border: 3px solid black; padding: 8px;">{{ input_team_name }}</th>
+                <th style="border: 3px solid black; padding: 8px;">{{ opponent_team_name }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for (input_stat, input_stat_val), (opp_stat, opp_stat_val) in zip(input_team_stats.items(), opp_team_stats.items()) %}
+            <tr>
+                <td style="border-left: 3px solid black; border-right: 3px solid black; border-bottom: 1px solid black; padding: 8px;">
+                    {{ input_stat }}
+                </td>
+                <td style="border-left: 3px solid black; border-right: 3px solid black; border-bottom: 1px solid black; padding: 8px; background-color: {% if input_stat_val < opp_stat_val %}lightgreen{% endif %};">
+                    {{ input_stat_val }}
+                </td>
+                <td style="border-left: 3px solid black; border-right: 3px solid black; border-bottom: 1px solid black; padding: 8px; background-color: {% if opp_stat_val < input_stat_val %}lightgreen{% endif %};">
+                    {{ opp_stat_val }}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- League Rankings Table -->
+    <h2>League Rankings</h2>
+    <table style="border-collapse: collapse; width: 100%; text-align: center; border: 3px solid black;">
+        <thead>
+            <tr>
+                <th style="border: 3px solid black; padding: 8px;">Stat Name</th>
+                <th style="border: 3px solid black; padding: 8px;">Team Name (Lg Rank Offense)</th>
+                <th style="border: 3px solid black; padding: 8px;">Opponent Name (Lg Rank Defense)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for (input_rank, input_rank_val), (opp_rank, opp_rank_val) in zip(input_team_rankings_offense.items(), input_team_rankings_defense.items()) %}
+            <tr>
+                <td style="border-left: 3px solid black; border-right: 3px solid black; border-bottom: 1px solid black; padding: 8px;">{{ input_rank }}</td>
+                <td style="border-left: 3px solid black; border-right: 3px solid black; border-bottom: 1px solid black; padding: 8px; background-color: {% if input_rank_val < opp_rank_val %}lightgreen{% endif %};">
+                    {{ input_rank_val }}
+                </td>
+                <td style="border-left: 3px solid black; border-right: 3px solid black; border-bottom: 1px solid black; padding: 8px; background-color: {% if opp_rank_val < input_rank_val %}lightgreen{% endif %};">
+                    {{ opp_rank_val }}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

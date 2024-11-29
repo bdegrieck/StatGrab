@@ -1,8 +1,8 @@
 
 
 class InvalidTeamInput(Exception):
-    def __init__(self, input: str):
-        super().__init__(f"Could not find data for input: {input}")
+    def __init__(self, inputs: list[str]):
+        super().__init__(f"Could not find data for input: {inputs}")
 
 
 class InvalidResponse(Exception):

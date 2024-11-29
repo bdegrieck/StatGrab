@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
-from errors import InvalidResponse
+from Backend.errors import InvalidResponse
 
 
 class Scraper:
