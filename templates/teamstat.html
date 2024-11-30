@@ -134,10 +134,10 @@
                 <td style="border-left: 3px solid black; border-right: 3px solid black; border-bottom: 1px solid black; padding: 8px;">
                     {{ input_stat }}
                 </td>
-                <td style="border-left: 3px solid black; border-right: 3px solid black; border-bottom: 1px solid black; padding: 8px; background-color: {% if input_stat_val < opp_stat_val %}lightgreen{% endif %};">
+                <td style="border-left: 3px solid black; border-right: 3px solid black; border-bottom: 1px solid black; padding: 8px; background-color: {% if input_stat_val > opp_stat_val %}lightgreen{% endif %};">
                     {{ input_stat_val }}
                 </td>
-                <td style="border-left: 3px solid black; border-right: 3px solid black; border-bottom: 1px solid black; padding: 8px; background-color: {% if opp_stat_val < input_stat_val %}lightgreen{% endif %};">
+                <td style="border-left: 3px solid black; border-right: 3px solid black; border-bottom: 1px solid black; padding: 8px; background-color: {% if opp_stat_val > input_stat_val %}lightgreen{% endif %};">
                     {{ opp_stat_val }}
                 </td>
             </tr>
